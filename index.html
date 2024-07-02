@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .quiz-container {
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            max-width: 600px;
+            width: 100%;
+        }
+        .quiz-header {
+            margin-bottom: 20px;
+        }
+        .quiz-header h2 {
+            margin: 0;
+        }
+        .quiz-question {
+            margin-bottom: 10px;
+        }
+        .quiz-options {
+            list-style: none;
+            padding: 0;
+        }
+        .quiz-options li {
+            margin-bottom: 10px;
+        }
+        .quiz-options input {
+            margin-right: 10px;
+        }
+        .quiz-footer {
+            margin-top: 20px;
+        }
+        .quiz-footer button {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .quiz-footer button:hover {
+            background: #0056b3;
+        }
+        .quiz-result {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h2>Quiz</h2>
+        </div>
+        <div class="quiz-body">
+            <div class="quiz-question">
+                <p>Question 1: What is the capital of France?</p>
+                <ul class="quiz-options">
+                    <li><label><input type="radio" name="q1" value="Paris"> Paris</label></li>
+                    <li><label><input type="radio" name="q1" value="London"> London</label></li>
+                    <li><label><input type="radio" name="q1" value="Rome"> Rome</label></li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>Question 2: What is 2 + 2?</p>
+                <ul class="quiz-options">
+                    <li><label><input type="radio" name="q2" value="3"> 3</label></li>
+                    <li><label><input type="radio" name="q2" value="4"> 4</label></li>
+                    <li><label><input type="radio" name="q2" value="5"> 5</label></li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>Question 3: What is the color of the sky?</p>
+                <ul class="quiz-options">
+                    <li><label><input type="radio" name="q3" value="Blue"> Blue</label></li>
+                    <li><label><input type="radio" name="q3" value="Green"> Green</label></li>
+                    <li><label><input type="radio" name="q3" value="Red"> Red</label></li>
+                </ul>
+            </div>
+        </div>
+        <div class="quiz-footer">
+            <button onclick="submitQuiz()">Submit</button>
+        </div>
+        <div class="quiz-result">
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <script>
+        function submitQuiz() {
+            const correctAnswers = {
+                q1: 'Paris',
+                q2: '4',
+                q3: 'Blue'
+            };
+
+            let score = 0;
+            let totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let question in correctAnswers) {
+                const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+                if (selectedOption && selectedOption.value === correctAnswers[question]) {
+                    score++;
+                }
+            }
+
+            const result = document.getElementById('result');
+            result.textContent = `You scored ${score} out of ${totalQuestions}.`;
+            document.querySelector('.quiz-result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
